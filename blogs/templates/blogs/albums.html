@@ -1,0 +1,65 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+{% for album in albums_info %}
+<div class="hero-wrap js-fullheight coverbg" style="background-image: url({{album.image1.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">Our Albums</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">album</a></span> <span>Vlog</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-12 heading-section ftco-animate text-center">
+                <h3 class="subheading">Yoga Albums</h3>
+                <h2 class="mb-1">Your Choice is Your Success</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% for album in albums %}
+            <div class="col-md-6 col-lg-4 mt-2">                
+                <div class="package-program ftco-animate">
+                    <a href="{% url 'album-detail' album.albums_id %}" class="img d-flex justify-content-center align-items-center"
+                        style="background-image: url({{album.cover.url}});">
+                        <div class="text p-5 text-center">
+                            <h3>{{ album.name }}</h3>
+                        </div>
+                    </a>
+                </div>              
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="ftco-gallery ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h3 class="subheading">Gallery</h3>
+                <h2 class="mb-1">See the latest photos</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for blog in random_blog_img %}
+            <div class="col-md-3 ftco-animate">
+                <a href="{{blog.upload_file.url}}" class="gallery image-popup img d-flex align-items-center"
+                    style="background-image: url('{{blog.upload_file.url}}');">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="fab fa-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock %}

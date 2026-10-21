@@ -1,0 +1,15 @@
+{% extends 'config/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-3">
+    <h1 class="text-center text-danger my-5">Delete User</h1>
+    <div class="col-md-6 offset-md-3">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}  
+            <button type="submit" class="btn btn-danger btn-sm float-end">Confirm Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

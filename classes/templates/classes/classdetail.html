@@ -1,0 +1,182 @@
+{% extends 'config/base.html' %}
+{% block content %}
+{%  for classinfo in class_info %}
+<section class="hero-wrap js-fullheight coverbg" style="background-image: url({{classinfo.image1.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">Yoga Classes</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="#">Home</a></span> <span>Classes</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+<section class="classes-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="classes__sidebar">
+                    <div class="classes__sidebar__item classes__sidebar__item--info">
+                        <h4>Classes Information</h4>
+                        <ul class="classes__sidebar__item__widget">
+                            <li><span class="icon_calendar"></span>{{ classes.class_day|join:", " }}</li>
+                            <li><span class="icon_clock_alt"></span>{{ classes.class_start_time|time:"h:i A" }} - {{ classes.class_end_time|time:"h:i A" }}</li>
+                        </ul>
+                        <ul class="classes__sidebar__item__id">
+                            <li><span class="icon_pin_alt"></span>{{ classes.location }}</li>
+                            {% if classes.instructor %}
+                            <li><span class="icon_id"></span>{{classes.instructor.user.name}}</li>
+                            {% else %}
+                            <li><span class="icon_id"></span>{{classes.other_instructor}}</li>
+                            {% endif %}
+                        </ul>
+                        <!-- <a href="#" class="sidebar-btn">JOIN NOW</a> -->
+                    </div>
+                    <div class="classes__sidebar__item">
+                        <h4>About Instructor</h4>
+                        <div class="classes__sidebar__instructor">
+                            <div class="classes__sidebar__instructor__pic">
+                                {% if classes.instructor.user.image %}
+                                <img src="{{ classes.instructor.user.image.url }}" alt="">
+                                {% else %}
+                                <img src="{{ classes.instructor_image.url }}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="classes__sidebar__instructor__text">
+                                {% if classes.instructor %}
+                                <div class="classes__sidebar__instructor__title">
+                                    <h4>{{classes.instructor.user.name}}</h4>
+                                    <span>{{classes.instructor.expertise}}</span>
+                                </div>
+                                <p>{{classes.instructor.bio}}<br /></p>
+                                <div class="classes__sidebar__instructor__social">
+                                    {% if classes.instructor.user.facebook %}
+                                    <a href="{{ classes.instructor.user.facebook }}"><span class="fab fa-facebook fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.instagram %}
+                                    <a href="{{ classes.instructor.user.instagram }}"><span class="fab fa-instagram fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.youtube %}
+                                    <a href="{{ classes.instructor.user.youtube }}"><span class="fab fa-youtube fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.tiktok %}
+                                    <a href="{{ classes.instructor.user.tiktok }}"><span class="fab fa-tiktok fa-2x"></span></a>
+                                    {% endif %}
+                                </div>
+                                {% else %}
+                                <div class="classes__sidebar__instructor__title">
+                                    <h4>{{classes.other_instructor}}</h4>
+                                    <span>{{classes.other_instructor_expertise}}</span>
+                                </div>
+                                <p>{{classes.other_instructor_bio}}<br /></p>
+                                <div class="classes__sidebar__instructor__social">
+                                    {% if classes.instructor.user.facebook %}
+                                    <a href="{{ classes.instructor.user.facebook }}"><span class="fab fa-facebook fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.instagram %}
+                                    <a href="{{ classes.instructor.user.instagram }}"><span class="fab fa-instagram fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.youtube %}
+                                    <a href="{{ classes.instructor.user.youtube }}"><span class="fab fa-youtube fa-2x"></span></a>
+                                    {% endif %}
+                                    {% if classes.instructor.user.tiktok %}
+                                    <a href="{{ classes.instructor.user.tiktok }}"><span class="fab fa-tiktok fa-2x"></span></a>
+                                    {% endif %}
+                                </div>
+                                {% endif %} 
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="classes__details">
+                    <div class="classes__details__large">
+                        <img src="{{ classes.image.url }}" class="img-fluid">
+                        <span>{{classes.class_category}}</span>
+                    </div>
+                    <ul class="classes__details__widget">
+                        <li><span class="icon_calendar"></span>{{ classes.class_day|join:", " }}</li>
+                        <li><span class="icon_clock_alt"></span>{{ classes.class_start_time|time:"h:i A" }} - {{ classes.class_end_time|time:"h:i A" }}</li>
+                    </ul>
+                    <h2>{{classes.title}}</h2>
+                    <p>{{classes.description}}</p>
+                    <div class="classes__details__item">
+                        <div class="row">
+                            {% for classimg in random_classes_img %}
+                            <div class="col-lg-4 col-md-4">
+                                <img src="{{ classimg.image.url }}" class="img-fluid">
+                            </div>
+                            {% endfor %}
+                            {% for blogimg in random_blog_img %}
+                            <div class="col-lg-8 col-md-8">
+                                
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <img src="{{blogimg.image.url}}" class="img-fluid">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% for classimg in random_classes_img %}
+                                <img src="{{ classimg.image.url }}" class="img-fluid">
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- <div class="classes__details__desc">
+                        <h6>The Secret to improving her height to achieve quick result, If you are going to use a
+                            passage of you need to be sure.</h6>
+                        <ul>
+                            <li><span class="icon_check"></span> All their equipment and instruments are alive.</li>
+                            <li><span class="icon_check"></span> The that about to watched storm, so beautiful
+                                terrific.</li>
+                            <li><span class="icon_check"></span> There are many variations of passages of lorem
+                                ppsum available.</li>
+                            <li><span class="icon_check"></span> If you are going to use a passage of you need to be
+                                sure.</li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="upcoming-classes spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title normal-title">
+                    <h2>Feature Course</h2>
+                    <!-- <p>The trainings are multi-style and you will learn and practice <br />Hatha Vinyasa (flow) and
+                        Yin Yoga.</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% for class in lest_classes %}
+            <div class="col-md-6 col-lg-4">
+                <div class="package-program ftco-animate">
+                    <a href="{% url 'class-detail' class.classes_id %}"
+                        class="img d-flex justify-content-center align-items-center"
+                        style="background-image: url({{class.image.url}});">
+                        <div class="text p-5 text-center">
+                            <h3>{{ class.title }}</h3>
+                            <p>{{ class.short_des}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-center mt-3">
+            <a href="{% url 'all-classes' %}" class="btn btn-primary p-3 px-4 custom-btn">--more classes--</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

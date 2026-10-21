@@ -1,0 +1,99 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- END nav -->
+{% for blog in blog_info %}
+<section class="hero-wrap js-fullheight coverbg" style="background-image: url({{blog.image1.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">Vlog Single</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Vlog Single</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
+                <!-- <h2 class="mb-3">{{blog.title}}</h2> -->
+                <div class="video-container">
+                    <video width="640" height="360" controls>
+                        <source src="{{ vlog.video.url }}" type="video/mp4"> Your browser does not support the video
+                        tag.
+                    </video>
+                </div>
+                <p>{{vlog.description}}</p>
+                <div><span class="fa fa-calendar"></span> {{vlog.date}}</div>
+
+            </div>
+            <div class="col-lg-4 sidebar ftco-animate bg-light">
+                <div class="sidebar-box ftco-animate bg-light">
+                    <h3 class="heading-2">Recent Vlogs</h3>
+                    {% for vlog in vlogs|slice:":-3" %}
+                    <div class="container block-21 mb-4 d-flex">
+                        <a href="{% url 'vlog-detail' vlog.vlog_id %}" class="mr-2">
+                            <div class="recvlogvdo-container">
+                                <video autoplay muted loop playsinline>
+                                    <source src="{{ vlog.video.url }}#t=7" type="video/mp4">
+                                </video>
+                            </div>
+                        </a>
+                        <div class="text">
+                            <div class="meta">
+                                <div><span class="fa fa-calendar"></span> {{ vlog.date }}</div>
+                                <p class="truncate mb-1">{{ vlog.description }}</p>
+                                <a href="{% url 'vlog-detail' vlog.vlog_id %}" class="see-more-link">see more</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+</section> <!-- .section -->
+
+
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+            stroke="#F96D00" />
+    </svg></div>
+
+<section class="ftco-gallery ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h3 class="subheading">Gallery</h3>
+                <h2 class="mb-1">See the latest photos</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for blog in random_blog_img %}
+            <div class="col-md-3 ftco-animate">
+                <a href="{{blog.image.url}}" class="gallery image-popup img d-flex align-items-center"
+                    style="background-image: url('{{blog.image.url}}');">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="fab fa-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-center mt-3">
+            <a href="{% url 'all-gallery' %}" class="btn btn-primary p-3 px-4 custom-btn">--more photos--</a>
+        </p>
+
+    </div>
+</section>
+{% endblock %}

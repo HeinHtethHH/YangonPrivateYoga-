@@ -1,0 +1,188 @@
+{% extends 'config/base.html' %}
+
+{% block content %}
+{% for about in about_info %}
+<section class="hero-wrap js-fullheight" style="background-image: url({{about.image1.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">About</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>About</span></p>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endfor %}
+{% for ceo in ceo_info %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row align-items-center aboutinfo">
+            <!-- Image Column -->
+            <div class="col-md-6 order-1 order-md-1">
+                <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
+                    <img class="w-100 h-100" src="{{ceo.image.url}}" alt="">
+                </div>
+            </div>
+            <!-- Text Column -->
+            <div class="col-md-6 order-2 order-md-2">
+                <div class="heading-section ftco-animate">
+                    <h2 class="mb-4">{{ceo.name}}</h2>
+                    <h3 class="mb-4">
+                        {% if ceo.reserved1 %}{{ceo.reserved1}} <br>{% endif %}
+                        {% if ceo.reserved2 %}{{ceo.reserved2}} <br>{% endif %}
+                        {% if ceo.reserved3 %}{{ceo.reserved3}}{% endif %}
+                    </h3>
+                </div>
+                <p class="ftco-animate">
+                    {{ceo.bio}}</p>
+                <div class="team-social text-center">
+                    {% if ceo.facebook %}
+                    <a href="{{ ceo.facebook }}"><span class="fab fa-facebook fa-2x"></span></a>
+                    {% endif %}
+                    {% if ceo.instagram %}
+                    <a href="{{ ceo.instagram }}"><span class="fab fa-instagram fa-2x"></span></a>
+                    {% endif %}
+                    {% if ceo.youtube %}
+                    <a href="{{ ceo.youtube }}"><span class="fab fa-youtube fa-2x"></span></a>
+                    {% endif %}
+                    {% if ceo.tiktok %}
+                    <a href="{{ ceo.tiktok }}"><span class="fab fa-tiktok fa-2x"></span></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+{% for consultant in consultant_info %}
+<section class="ftco-section consultant_section">
+    <div class="container">
+        <div class="row align-items-center aboutinfo">
+            <!-- Text Column -->
+            <div class="col-md-6 order-2 order-md-1">
+                <div class="heading-section ftco-animate">
+                    <h2 class="mb-4">{{consultant.name}}</h2>
+                    <h3 class="mb-4">
+                        {% if consultant.reserved1 %}{{consultant.reserved1}} <br>{% endif %}
+                        {% if consultant.reserved2 %}{{consultant.reserved2}} <br>{% endif %}
+                        {% if consultant.reserved3 %}{{consultant.reserved3}}{% endif %}
+                    </h3>
+                </div>
+                <p class="ftco-animate">
+                    {{consultant.bio}}</p>
+                <div class="team-social text-center">
+                    {% if consultant.facebook %}
+                    <a href="{{ consultant.facebook }}"><span class="fab fa-facebook fa-2x"></span></a>
+                    {% endif %}
+                    {% if consultant.instagram %}
+                    <a href="{{ consultant.instagram }}"><span class="fab fa-instagram fa-2x"></span></a>
+                    {% endif %}
+                    {% if consultant.youtube %}
+                    <a href="{{ consultant.youtube }}"><span class="fab fa-youtube fa-2x"></span></a>
+                    {% endif %}
+                    {% if consultant.tiktok %}
+                    <a href="{{ consultant.tiktok }}"><span class="fab fa-tiktok fa-2x"></span></a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Image Column -->
+            <div class="col-md-6 order-1 order-md-2">
+                <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
+                    <img class="w-100 h-100" src="{{consultant.image.url}}" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+
+            <h1 class="display-6 mb-4">Meet The Team</h1>
+        </div>
+        <div class="row mb-3">
+            {% for instructor in instructor_info%}
+            <div class="col-md-6 col-lg-4">
+                <div class="package-program ftco-animate">
+                    <a href="{{instructor.image.url}}"
+                        class="img d-flex justify-content-center align-items-center image-popup"
+                        style="background-image: url({{instructor.image.url}});">
+                        <div class="text p-5 text-center">
+                            <h3>{{ instructor.name }}</h3>
+                            <p>{{ instructor.instructor.expertise }}</p>
+                        </div>
+
+                    </a>
+                </div>
+                <div class="team-social text-center mt-2 mb-4">
+                    {% if instructor.facebook %}
+                    <a href="{{ instructor.facebook }}"><span class="fab fa-facebook fa-2x"></span></a>
+                    {% endif %}
+                    {% if instructor.instagram %}
+                    <a href="{{ instructor.instagram }}"><span class="fab fa-instagram fa-2x"></span></a>
+                    {% endif %}
+                    {% if instructor.youtube %}
+                    <a href="{{ instructor.youtube }}"><span class="fab fa-youtube fa-2x"></span></a>
+                    {% endif %}
+                    {% if instructor.tiktok %}
+                    <a href="{{ instructor.tiktok }}"><span class="fab fa-tiktok fa-2x"></span></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        <div class="block-27 mt-4 justify-content-center d-flex">
+            <ul>
+                {% if instructor_info.has_previous %}
+                <li><a href="?page={{ instructor_info.previous_page_number }}">&lt;</a></li>
+                {% endif %}
+                {% for num in instructor_info.paginator.page_range %}
+                {% if instructor_info.number == num %}
+                <li class="active"><span>{{ num }}</span></li>
+                {% else %}
+                <li><a href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if instructor_info.has_next %}
+                <li><a href="?page={{ instructor_info.next_page_number }}">&gt;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="ftco-gallery ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h3 class="subheading">Gallery</h3>
+                <h2 class="mb-1">See the latest photos</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for blog in random_blog_img %}
+            <div class="col-md-3 ftco-animate">
+                <a href="{{blog.upload_file.url}}" class="gallery image-popup img d-flex align-items-center"
+                    style="background-image: url('{{blog.upload_file.url}}');">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="fab fa-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-center mt-3">
+            <a href="{% url 'all-gallery' %}" class="btn btn-primary p-3 px-4 custom-btn">--more photos--</a>
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

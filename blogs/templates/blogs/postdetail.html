@@ -1,0 +1,178 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- END nav -->
+{% for blog in blog_info %}
+<section class="hero-wrap js-fullheight coverbg" style="background-image: url({{blog.image1.url}});">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <h1 class="mb-3 bread">Blog Single</h1>
+        <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Blog Single</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-8 ftco-animate">
+        <!-- <h2 class="mb-3">{{blog.title}}</h2> -->
+        <div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+          {% if blog_detail.additional_media.all|length > 1 %}
+          <div class="carousel-indicators">
+            {% for media in blog_detail.additional_media.all %}
+            <button type="button" data-bs-target="#blogCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+              class="{% if forloop.first %}active{% endif %}" aria-current="true"></button>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="carousel-inner">
+            {% for media in blog_detail.additional_media.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              {% if blog_detail.post_type == 'VLOG' %}
+              <div class="video-container">
+                <video width="640" height="360" controls>
+                  <source src="{{media.upload_file.url}}" type="video/mp4"> Your browser does not support the video
+                  tag.
+                </video>
+              </div>
+              {% else %}
+              <p>
+                <img src="{{media.upload_file.url}}" alt="" class="img-fluid">
+              </p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+
+          {% if blog_detail.additional_media.all|length > 1 %}
+          <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+          {% endif %}
+        </div>
+
+        {% for media in blog_detail.additional_media.all %}
+
+        {% endfor %}
+        <p>{{blog_detail.description}}</p>
+        {% if blog_detail.pose_title %}
+         <div><span class="flaticon-meditation"></span>Pose : {{blog_detail.pose_title}}</div> 
+        {% endif %}
+        {% if blog_detail.albums %}
+        <div>‌<span class="fa fa-book"></span> Album : <a
+            href="{% url 'album-detail' blog_detail.albums.albums_id %}">{{blog_detail.albums}}</a></div>
+        {% else %}
+        <div>‌<span class="fa fa-book"></span> Album : <a href="{% url 'album-detail' blog_detail.albums %}">Aerial
+            Yoga</a></div>
+        {% endif %}
+        <div><span class="fa fa-calendar"></span> {{blog_detail.date}}</div>
+      </div>
+
+
+      <div class="col-lg-4 sidebar ftco-animate bg-light">
+        <div class="sidebar-box ftco-animate bg-light">
+          <h3 class="heading-2">Recent Blog</h3>
+          {% for blog in blogs|slice:":-3" %}
+          <div class="container block-21 mb-4 d-flex">
+            {% for media in blog.additional_media.all %}
+            {% if blog.post_type == 'VLOG' %}
+            <a href="{% url 'blog-detail' blog.blog_id %}" class="mr-2">
+              <div class="recvlogvdo-container">
+                <video autoplay muted loop playsinline>
+                  <source src="{{ media.upload_file.url}}#t=7" type="video/mp4">
+                </video>
+              </div>
+            </a>
+            {% else %}
+            <a href="{% url 'blog-detail' blog.blog_id %}" class="blog-img mr-4"
+              style="background-image: url('{{media.upload_file.url}}');"></a>
+            {% endif %}
+            {% endfor %}
+            <div class="text">
+              <!-- <h3 class="heading"><a href="{% url 'blog-detail' blog.blog_id %}">{{blog.title}}</a></h3> -->
+              <div class="meta">
+                <div><span class="fa fa-calendar"></span> {{blog.date}}</div>
+                <p class="truncate mb-1">{{blog.description}}</p>
+                <a href="{% url 'blog-detail' blog.blog_id %}" class="see-more-link">see more</a>
+                <!-- <div><a href="#"><span class="icon-person"></span> Admin</a></div> -->
+                <!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <!-- <div class="sidebar-box ftco-animate">
+              <h3 class="heading-2">Tag Cloud</h3>
+              <div class="tagcloud">
+                <a href="#" class="tag-cloud-link">dish</a>
+                <a href="#" class="tag-cloud-link">menu</a>
+                <a href="#" class="tag-cloud-link">food</a>
+                <a href="#" class="tag-cloud-link">sweet</a>
+                <a href="#" class="tag-cloud-link">tasty</a>
+                <a href="#" class="tag-cloud-link">delicious</a>
+                <a href="#" class="tag-cloud-link">desserts</a>
+                <a href="#" class="tag-cloud-link">drinks</a>
+              </div>
+            </div> -->
+
+          <!-- <div class="sidebar-box ftco-animate">
+              <h3 class="heading-2">Paragraph</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+</section> <!-- .section -->
+
+
+
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+  </svg></div>
+
+<section class="ftco-gallery ftco-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-5 pb-3">
+      <div class="col-md-7 heading-section ftco-animate text-center">
+        <h3 class="subheading">Gallery</h3>
+        <h2 class="mb-1">See the latest photos</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      {% for blog in random_blog_img %}
+      <div class="col-md-3 ftco-animate">
+        <a href="{{blog.upload_file.url}}" class="gallery image-popup img d-flex align-items-center"
+          style="background-image: url('{{blog.upload_file.url}}');">
+          <div class="icon mb-4 d-flex align-items-center justify-content-center">
+            <span class="fab fa-instagram"></span>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="text-center mt-3">
+      <a href="{% url 'all-gallery' %}" class="btn btn-primary p-3 px-4 custom-btn">--more photos--</a>
+    </p>
+
+  </div>
+</section>
+{% endblock %}

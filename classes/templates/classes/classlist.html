@@ -1,0 +1,45 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-info">Users</h1>
+<div class="container justify-content-center">
+    <div class="col-md-10 offset-md-1">
+        <table class="table table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Short Description</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Instructor</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for class in classes %}
+                <tr>
+                    <td><img src="" alt=""></td>
+                    <td>{{class.classes_id}}</td>
+                    <td>{{class.title}}</td>
+                    <td>{{class.short_des}}</td>
+                    <td>{{class.class_start_date}}-{{class.class_end_date}}</td>
+                    <td>{{class.location}}</td>
+                    <td>{{class.instructor}}</td>
+                    <td>{{class.class_type}}</td>
+                    <td>
+                        <a href="#" class="btn btn-warning btn-sm">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a href="{% url 'class-delete' class.classes_id %}" class="btn btn-danger btn-sm">
+                            <i class="material-icons">delete</i>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

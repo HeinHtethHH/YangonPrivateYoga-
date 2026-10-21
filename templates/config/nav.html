@@ -1,0 +1,137 @@
+{% load static %}
+<div class="container-fluid" style="background-color: rgb(103, 133, 133)">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color: rgb(210, 168, 96);" href="/">
+                <img src="{% static 'YPY_Logo.png' %}" alt="" width="40" height="40" class="small-icon me-2">
+                <samp>Yangon Private Yoga</samp>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fas fa-bars fa-1x"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+                    </li>
+                    {% if show_admin_menu %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0)" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if show_user_menu %}
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="">User</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'users_lists' %}">User Lists</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'app_del_user' %}">Approve/Delete</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                            {% if show_blog_menu%}
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="">Blog</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'post-blogs' %}">Post Blog</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'create-album' %}">Create Album</a></li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                            {% if show_class_menu %}
+                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="">Class</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'class-list' %}">Class List</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'class-new' %}">New Class</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0)" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Class
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'all-classes' %}">Class</a></li>
+                            <li><a class="dropdown-item" href="{% url 'classes-schedule' %}">Schedule</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'all-blogs' %}">Blog</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0)" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Stories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'all-blogs' %}">Posts</a></li>
+                            <li><a class="dropdown-item" href="{% url 'all-albums' %}">Albums</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page"
+                            href="{% url 'yoga_about' %}">About</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'yoga_about' %}">About</a></li>
+                            <li><a class="dropdown-item" href="#">Content</a></li>
+                        </ul>
+                    </li> -->
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        {% if request.user.image %}
+                        <a class="nav-link dropdown-toggle text-white d-flex align-items-center"
+                            href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"> <img src="{{ request.user.image.url }}" alt="Profile Image"
+                                class="rounded-circle" width="30" height="30"> </a>
+                        {% else %}
+                        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0)" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons">account_circle</i>
+                        </a>
+                        {% endif %}
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'user-profile' %}">{{request.user.name}}</a></li>
+                            <!-- <li><a class="dropdown-item" href="{% url 'user-profile' %}">{{request.user.id}}</a></li> -->
+                            <li>
+                                <form id="logout-form" method="POST" action="{% url 'user-logout' %}">
+                                    {% csrf_token %}
+                                    <a class="dropdown-item text-white"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+                                </form>
+                            </li>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0)" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons">person</i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'user-login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user-register' %}">Register</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

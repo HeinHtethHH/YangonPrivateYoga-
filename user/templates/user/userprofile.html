@@ -1,0 +1,36 @@
+{% extends 'config/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-card text-center">
+        <!-- Profile Image -->
+         {% if userinfo.image %}
+        <div class="profile-img-wrapper"> <img src="{{ userinfo.image.url }}" alt="Profile" class="profile-img">
+            <!-- <div class="edit-overlay"> <a class="btn btn-sm btn-light" href="{% url 'user-image-update' %}">Edit</a> </div> -->
+        </div>
+        {% else %}
+        <div class="profile-img-wrapper"> <img src="{{ MEDIA_URL }}users/Default_User.jpg" alt="Profile" class="profile-img">
+            <!-- <div class="edit-overlay"> <a class="btn btn-sm btn-light" href="{% url 'user-image-update' %}">Edit</a> </div> -->
+        </div>
+        {% endif %}
+
+        <!-- Name -->
+        <h3 class="mb-1">{{ userinfo.name }}</h3>
+
+        <!-- Bio -->
+        <p class="text-muted">{{ userinfo.bio }}</p>
+
+        <!-- Contact Info -->
+        <ul class="list-group list-group-flush text-start mt-3">
+            <li class="list-group-item"><strong>Email:</strong> {{ userinfo.email }}</li>
+            <li class="list-group-item"><strong>Phone:</strong> {{ userinfo.phone }}</li>
+        </ul>
+
+        <!-- Action Buttons -->
+        <div class="mt-3">
+            <!-- <a href="{% url 'user-info-update' %}" class="btn btn-primary btn-sm">Edit Profile</a> -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

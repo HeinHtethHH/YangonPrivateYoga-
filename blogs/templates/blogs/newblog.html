@@ -1,0 +1,34 @@
+{% extends 'config/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="container mb-3">
+    <h1 class="text-center text-info my-5">Post Blog</h1>
+    <div class="col-md-6 offset-md-3">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <hr>
+            <h3>Please Upload File</h3>
+            {{ formset.management_form }}
+            {% for subform in formset %}
+
+            <div class="subform">
+                {{ subform | crispy }}
+            </div>
+            <div id="empty-form" style="display:none;">
+                {{ formset.empty_form|crispy }}
+            </div>
+
+            {% endfor %}
+            <button type="button" id="add-form" class="btn btn-success btn-sm">
+                + Add Blog media
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm float-end">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

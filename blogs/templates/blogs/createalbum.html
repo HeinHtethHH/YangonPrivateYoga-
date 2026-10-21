@@ -1,0 +1,15 @@
+{% extends 'config/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-3">
+    <h1 class="text-center text-info my-5">Create Album</h1>
+    <div class="col-md-6 offset-md-3">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-primary btn-sm float-end">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

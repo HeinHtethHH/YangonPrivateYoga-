@@ -1,0 +1,100 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+{% for classinfo in class_info %}
+<section class="hero-wrap js-fullheight coverbg" style="background-image: url({{classinfo.image1.url}});">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+			<div class="col-md-9 ftco-animate text-center">
+				<h1 class="mb-3 bread">Yoga Classes</h1>
+				<p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Classes</span></p>
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
+
+<section class="ftco-section">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-3">
+			<div class="col-md-12 heading-section ftco-animate text-center">
+				<h3 class="subheading">Yoga Classes</h3>
+				<h2 class="mb-1">Choose Your Level &amp; Focus</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			{% for class in practic_classes %}
+			<div class="col-md-6 col-lg-4 mt-2">
+				<div class="package-program ftco-animate">
+					<a href="{% url 'class-detail' class.classes_id %}"
+						class="img d-flex justify-content-center align-items-center"
+						style="background-image: url({{class.image.url}});">
+						<div class="text p-5 text-center">
+							<h3>{{ class.title }}</h3>
+							<p>{{ class.instructor}}</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% if workshop_classes %}
+<section class="ftco-section">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-3">
+			<div class="col-md-12 heading-section ftco-animate text-center">
+				<h3 class="subheading">Workshops</h3>
+				<h2 class="mb-1">Choose Your Level &amp; Focus</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			{% for class in workshop_classes %}
+			<div class="col-md-6 col-lg-4 mt-2">
+				<div class="package-program ftco-animate">
+					<a href="{% url 'class-detail' class.classes_id %}"
+						class="img d-flex justify-content-center align-items-center"
+						style="background-image: url({{class.image.url}});">
+						<div class="text p-5 text-center">
+							<h3>{{ class.title }}</h3>
+							<p>{{ class.instructor}}</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
+
+<section class="ftco-gallery ftco-section">
+	<div class="container">
+		<div class="row justify-content-center mb-5 pb-3">
+			<div class="col-md-7 heading-section ftco-animate text-center">
+				<h3 class="subheading">Gallery</h3>
+				<h2 class="mb-1">See the latest photos</h2>
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			{% for blog in random_blog_img %}
+            <div class="col-md-3 ftco-animate">
+                <a href="{{blog.upload_file.url}}" class="gallery image-popup img d-flex align-items-center"
+                    style="background-image: url('{{blog.upload_file.url}}');">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="fab fa-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+		</div>
+		<p class="text-center mt-3">
+			<a href="{% url 'all-gallery' %}" class="btn btn-primary p-3 px-4 custom-btn">--more photos--</a>
+		</p>
+	</div>
+</section>
+
+{% endblock %}

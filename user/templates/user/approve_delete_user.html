@@ -1,0 +1,40 @@
+{% extends 'config/base.html' %}
+{% block content %}
+<h1 class="text-center text-info">Unapprove User</h1>
+<div class="container">
+    <div class="col-md-10 offset-md-1">
+        <table class="table table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in userInap %}
+                <tr>
+                    <td>{{user.user_id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.date_of_birth}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.address}}</td>
+                    <td>
+                        <a href="{% url 'requser-approve' user.user_id %}" class="btn btn-warning btn-sm">
+                            <i class="material-icons">check</i>
+                        </a>
+                        <a href="{% url 'requser-delete' user.user_id %}" class="btn btn-danger btn-sm">
+                            <i class="material-icons">delete</i>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

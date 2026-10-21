@@ -1,0 +1,99 @@
+{% extends 'config/base.html' %}
+{% load static %}
+{% block content %}
+{% for blog in blog_info %}
+<div class="hero-wrap js-fullheight coverbg" style="background-image: url({{blog.image1.url}});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <h1 class="mb-3 bread">Our Vlog</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Home</a></span> <span>Vlog</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-12 heading-section ftco-animate text-center">
+                <h3 class="subheading">Vlogs</h3>
+                <h2 class="mb-1">Make The Most Of Your Time</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            {% for vlog in vlogs %}
+            <div class="col-md-4 d-flex ftco-animate mt-3">
+                <div class="blog-entry">
+                    <!-- <a href="blog-single.html" class="block-20" style="background-image: url('{{blog.image.url}}');">
+              </a> -->
+                    <a href="{% url 'vlog-detail' vlog.vlog_id %}">
+                        <video class="card-img-top fixed-img" autoplay muted loop playsinline>
+                            <source src="{{ vlog.video.url }}#t=7" type="video/mp4">
+                        </video>
+                    </a>
+                    <div class="text p-4 float-right d-block">
+                        <div class="d-flex align-items-center pt-2 mb-4">
+                            <div class="one">
+                                <span class="">{{vlog.date}}</span>
+                            </div>
+                            <!-- <div class="two">
+              			<span class="yr">2018</span>
+              			<span class="mos">December</span>
+              		</div> -->
+                        </div>
+                        <p class="truncate mb-1">{{vlog.description}}</p>
+                        <a href="{% url 'vlog-detail' vlog.vlog_id %}" class="see-more-link">see more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        <div class="block-27 mt-4 justify-content-center d-flex">
+            <ul>
+                {% if vlogs.has_previous %}
+                <li><a href="?page={{ vlogs.previous_page_number }}">&lt;</a></li>
+                {% endif %}
+                {% for num in vlogs.paginator.page_range %}
+                {% if vlogs.number == num %}
+                <li class="active"><span>{{ num }}</span></li>
+                {% else %}
+                <li><a href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if vlogs.has_next %}
+                <li><a href="?page={{ vlogs.next_page_number }}">&gt;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<section class="ftco-gallery ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <h3 class="subheading">Gallery</h3>
+                <h2 class="mb-1">See the latest photos</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for blog in random_blog_img %}
+            <div class="col-md-3 ftco-animate">
+                <a href="{{blog.image.url}}" class="gallery image-popup img d-flex align-items-center"
+                    style="background-image: url('{{blog.image.url}}');">
+                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                        <span class="fab fa-instagram"></span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

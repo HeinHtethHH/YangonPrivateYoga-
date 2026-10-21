@@ -1,0 +1,135 @@
+Table
+-----
+User
+UserRequest
+Post
+Admin
+Category
+******************
+Page
+----
+Home
+Blog-BlogDetail
+User
+Login
+******************
+Home Table
+id/title/image/category
+
+Post Table
+id/title/image/description/category/date
+Comment Table
+comment id/ 
+
+User
+user_id/name/dateofbitrh/image/email/phone/address/password/password/date/status/user_roll
+
+Admin
+admin_id/title/image/
+
+Category
+category_id/name
+
+Class
+classes_id,title,image,short_des,description,schedule,class_start_date,class_end_date,class_start_time,class_end_time,class_day,location,class_category,instructor,class_type
+
+Class Day
+("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), 
+	id
+    title
+    description
+    schedule
+    class_start_date 
+    class_end_date
+    class_start_time
+    class_end_time
+    class_type
+    class_id
+
+Time Table
+table_id/title/date/time/class[forg to class]
+
+#678585
+#d2a860
+#b3b3b3
+#3b3d3d
+=======================
+requirement
+
+class မှာ create Date Time ထည့်ရန်
+
+aerial
+
+========================
+domain mail > yangonprivateyoga@yangonprivateyoga.com
+password > Y@ng0npr!vat8y0ga
+=========================
+
+add to video
+add yoga pose name to blog => add field to blog table
+the relevant album for blog => add field to blog table
+	- video (done)
+    - album (done)
+	- group pose 
+	- single pose
+-------------------
+config
+------
+nav.html
+base.html
+
+ygngoga
+-------
+views.py
+welcome.html
+about.html
+
+Class
+-----
+models.py
+views.py
+classes.html
+
+Blog
+-----
+models.py
+form.py
+views.py
+urls.py
+admin.py
+postdetail.html
+post.html
+newblog.html
+createalbum.html (new)
+albums.html (new)
+albumsdetail.html (new)
+
+style.css
+
+management\commands\migrate_blog_images.py
+
+blog_formset.js
+pip install django-dynamic-formset
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+
+BlogMedia
+
+ygnyoga_ygnyoga
+blogs_category
+blogs_blogs
+user_customer
+user_instructor
+auth_group
+user_customer_groups
+classes_classes
+classes_sundayclass
+classes_mondayclass
+classes_tuesdayclass
+classes_wednesdayclass
+classes_thursdayclass
+classes_fridayclass
+classes_saturdayclass
+
+python manage.py migrate_blog_images
+

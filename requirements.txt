@@ -1,0 +1,13 @@
+asgiref==3.11.1
+crispy-bootstrap5==0.7
+Django==4.2.11
+django-crispy-forms==2.5
+django-multiselectfield==1.0.1
+mysql-connector-python==9.5.0
+pillow==12.1.0
+PyMySQL==1.1.2
+sqlparse==0.5.5
+tzdata==2025.3
+channels==4.0.0
+channels-redis==4.1.0
+gunicorn==21.2.0

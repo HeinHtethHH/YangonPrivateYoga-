@@ -1,0 +1,22 @@
+{% extends 'config/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container mb-3">
+    <h1 class="text-center text-info my-5">Approve User</h1>
+    <div class="col-md-6 offset-md-3">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <datalist id="role-list">
+                <option value="admin">
+                <option value="instructor">
+                <option value="normal">
+                <option value="guest">
+            </datalist>
+            
+            <button type="submit" class="btn btn-primary btn-sm float-end">Approve</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
